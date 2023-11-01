@@ -12,7 +12,9 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.get('/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const response = await query(
+
+  const basicInfo = await query('SELECT * FROM STATION WHERE id = $1', [id])
+  const stats = await query(
     'SELECT COUNT(*) as start_count, avg(duration) as avg_duration, avg(distance) as avg_distance, (\
       SELECT COUNT(*) FROM JOURNEY WHERE return_station_id = $1\
     ) AS end_count\
@@ -20,7 +22,8 @@ router.get('/:id', async (req: Request, res: Response) => {
     ;',
     [id]
   )
-  res.send(response.rows)
+
+  res.send({ ...basicInfo.rows[0], ...stats.rows[0] })
 })
 
 export default router
