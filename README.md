@@ -5,6 +5,7 @@ This is a backend of a web application for displaying data from journeys made wi
 
 You can read more about the requirements for this application from [the exercise by Solita](https://github.com/solita/dev-academy-spring-2024-exercise).
 
+You can find the frontend from [a separate repository](https://github.com/lapaset/citybike-frontend).
 
 ## Environment Variables
 
